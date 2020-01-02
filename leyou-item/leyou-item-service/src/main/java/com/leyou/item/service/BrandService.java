@@ -8,6 +8,7 @@ import com.leyou.item.pojo.Brand;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
@@ -21,7 +22,7 @@ public class BrandService {
     public PageResult<Brand> queryBrandsByPage(String key, Integer page, Integer rows, String sortBy, Boolean desc) {
         Example example = new Example(Brand.class);
         Example.Criteria criteria = example.createCriteria();
-        if(StringUtil.isEmpty(key)){
+        if(!StringUtil.isEmpty(key)){
             criteria.andLike("name","%"+key+"%").orEqualTo("letter",key);
         }
 
@@ -30,7 +31,19 @@ public class BrandService {
             example.setOrderByClause(sortBy + " " +(desc ? "desc":"asc"));
         }
         List<Brand> brands = this.brandMapper.selectByExample(example);
-        PageInfo<Brand> pageInfo = new PageInfo<>();
+        PageInfo<Brand> pageInfo = new PageInfo<>(brands);
         return  new PageResult<>(pageInfo.getTotal(),pageInfo.getList());
+    }
+    @Transactional
+    public void saveBrand(Brand brand,List<Long> cids) {
+
+        Boolean flag = this.brandMapper.insertSelective(brand) == 1;
+
+        if(flag){
+            cids.forEach(cid ->{
+                this.brandMapper.insertCategoryAndBrand(cid,brand.getId());
+            });
+        }
+
     }
 }

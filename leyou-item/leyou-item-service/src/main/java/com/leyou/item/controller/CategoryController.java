@@ -23,16 +23,16 @@ public class CategoryController {
 
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryCategoriesByPid(@RequestParam(value="pid",defaultValue = "0")Long pid) {
-            if (pid == null || pid < 0) {
-                //return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                //return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                return  ResponseEntity.badRequest().build();
-            }
+        if (pid == null || pid < 0) {
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            //return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
+        }
 
-            List<Category> categories = this.categoryService.queryCategoriesByPid(pid);
-            if (CollectionUtils.isEmpty(categories)) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(categories);
-
+        List<Category> categories = this.categoryService.queryCategoriesByPid(pid);
+        if (CollectionUtils.isEmpty(categories)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(categories);
+    }
 }
