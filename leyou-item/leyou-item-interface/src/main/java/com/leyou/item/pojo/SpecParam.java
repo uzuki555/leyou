@@ -15,6 +15,15 @@ public class SpecParam {
     private String unit;
     private Boolean searching;
     private String segments;
+    private Boolean generic;
+
+    public Boolean getGeneric() {
+        return generic;
+    }
+
+    public void setGeneric(Boolean generic) {
+        this.generic = generic;
+    }
 
     public Long getId() {
         return id;
