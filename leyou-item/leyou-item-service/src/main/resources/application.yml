@@ -11,6 +11,14 @@ spring:
   cloud:
     refresh:
       refreshable: none
+  rabbitmq:
+    addresses:
+    username:
+    password:
+    virtual-host:
+    publisher-confirms: true
+    template:
+      exchange: LEYOU.ITEM.EXCHANGE
 eureka:
   client:
     service-url:
@@ -19,4 +27,6 @@ eureka:
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 15
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   type-aliases-package: com.leyou.item.pojo

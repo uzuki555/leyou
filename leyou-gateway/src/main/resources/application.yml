@@ -14,3 +14,5 @@ zuul:
   prefix: /api
   routes:
     item-service: /item/**
+    search-service: /search/**
+    user-service: /user/**

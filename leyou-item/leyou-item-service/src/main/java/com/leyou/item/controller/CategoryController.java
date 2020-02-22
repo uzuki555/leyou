@@ -35,4 +35,17 @@ public class CategoryController {
         }
         return ResponseEntity.ok(categories);
     }
+    @GetMapping
+    public ResponseEntity<List<String>> queryNamesByIds(@RequestParam("ids") List<Long> ids){
+        if (ids == null || ids.size() < 0) {
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            //return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
+        }
+        List<String> names = this.categoryService.queryNamesByIds(ids);
+        if (CollectionUtils.isEmpty(names)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(names);
+    }
 }
