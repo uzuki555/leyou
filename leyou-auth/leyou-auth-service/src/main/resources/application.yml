@@ -1,0 +1,23 @@
+server:
+  port: 8007
+spring:
+  application:
+    name: leyou-auth
+eureka:
+  client:
+    service-url:
+     default-zone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+
+
+leyou:
+  jwt:
+    privateKeyPath:
+    publicKeyPath:
+    expires:
+    cookieName: LY_TOKEN
+    secret:
+

@@ -12,6 +12,7 @@ spring:
     virtual-host:
 eureka:
   client:
+
     service-url:
       defaultZone: http://localhost:10086/eureka
     registry-fetch-interval-seconds: 5
