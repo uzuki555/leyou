@@ -29,4 +29,6 @@ public interface GoodsApi {
     public  Void updateGoods(@RequestBody SpuBo spuBo);
     @GetMapping("{id}")
     public  Spu querySpuById(@PathVariable("id")Long id );
+    @GetMapping("sku/{id}")
+    public Sku querySkuBySkuId(@PathVariable("id")Long id);
 }

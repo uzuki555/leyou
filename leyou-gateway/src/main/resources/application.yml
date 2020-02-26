@@ -24,8 +24,8 @@ zuul:
 
 leyou:
   jwt:
-    expires:
     cookieName: LY_TOKEN
+    publicKeyPath:
   filter:
     allowPaths:
       - /api/auth

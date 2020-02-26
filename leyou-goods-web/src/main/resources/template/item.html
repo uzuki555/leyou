@@ -644,8 +644,8 @@
 				}
 			},
 			addCart(){
-        		ly.http.get("/auth/verify").then(resp => {
-
+        		ly.verfiyUser.then(resp => {
+					ly.http.post("addCart",{skuId:this.sku.id,num:this.num,})
 				}).catch(() =>{
 					let carts = ly.store.get("LY_CART") || [] ;
 					let cart = carts.find(cart => this.sku.id==cart.skuId);
